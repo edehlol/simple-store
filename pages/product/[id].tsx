@@ -8,13 +8,12 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 const ProductPage = ({ product }: { product: Product }) => {
   const [addedToCart, setAddedToCart] = useState(false);
   const cartIds = useAppSelector(selectCartIds);
+  const isAdded = cartIds.includes(product.id);
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
     setAddedToCart(!addedToCart);
-    cartIds.includes(product.id)
-      ? dispatch(removeProduct(product.id))
-      : dispatch(addProduct(product));
+    isAdded ? dispatch(removeProduct(product.id)) : dispatch(addProduct(product));
   };
   return (
     <Layout>
@@ -25,8 +24,13 @@ const ProductPage = ({ product }: { product: Product }) => {
             <h4 className="text-2xl font-semibold mb-8">{product.name}</h4>
             <h3 className="text-2xl mb-8">${product.price}</h3>
             <input type="number" className="border py-4 w-32 mb-8 px-4" />
-            <button className="w-full bg-gray-900 text-white py-4 mb-8" onClick={handleAddToCart}>
-              {addedToCart ? 'added' : 'add to cart'}
+            <button
+              className={`w-full  text-white py-4 mb-8 ${
+                isAdded ? 'bg-green-600' : 'bg-gray-900'
+              } `}
+              onClick={handleAddToCart}
+            >
+              {isAdded ? 'added' : 'add to cart'}
             </button>
           </div>
         </div>
