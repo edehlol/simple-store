@@ -1,26 +1,16 @@
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import React from 'react';
-
-const defaultValue = {
-  name: '',
-  email: '',
-  message: '',
-};
-const dude = {
-  name: 'dude',
-  email: 'theman@mandam.com',
-  message: 'Suh dude',
-};
-
-export const MyContext = React.createContext(defaultValue);
+import React, { useReducer, useState } from 'react';
+import { Cart } from '../types/Cart';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <MyContext.Provider value={dude}>
+    <Provider store={store}>
       <Component {...pageProps} />
-    </MyContext.Provider>
+    </Provider>
   );
 }
 export default MyApp;
