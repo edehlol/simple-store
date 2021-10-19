@@ -1,9 +1,10 @@
 import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
+import { CartProduct } from '../types/CartProduct';
 import { Product } from '../types/Product';
 import { RootState } from './store';
 
 interface CartState {
-  products: Product[];
+  products: CartProduct[];
 }
 
 const initialState: CartState = {
@@ -14,18 +15,20 @@ const cart = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    // addProduct: (state, action) => {
-    //   state.products.push(action.payload);
-    // },
     addProduct: {
-      reducer: (state, action: PayloadAction<Product>) => {
-        state.products.push(action.payload);
+      reducer: (state, action: PayloadAction<CartProduct>) => {
+        const existingProduct = state.products.find((product) => product.id === action.payload.id);
+        if (existingProduct) {
+          existingProduct.quantity += 1;
+        } else {
+          state.products.push(action.payload);
+        }
       },
-      prepare: (product) => {
+      prepare: ({ product, quantity }) => {
         return {
           payload: {
             ...product,
-            quantity: 1,
+            quantity,
           },
         };
       },
@@ -33,16 +36,44 @@ const cart = createSlice({
     removeProduct(state, action: PayloadAction<string>) {
       state.products = state.products.filter((product) => product.id !== action.payload);
     },
+    addQuantity(state, action: PayloadAction<string>) {
+      const id = action.payload;
+      const existingProduct = state.products.find((product) => product.id === id);
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      }
+    },
+    subtractQuantity(state, action: PayloadAction<string>) {
+      const id = action.payload;
+      const existingProduct = state.products.find((product) => product.id === id);
+      if (existingProduct) {
+        existingProduct.quantity -= 1;
+      }
+    },
   },
 });
 
-export const { addProduct, removeProduct } = cart.actions;
+export const { addProduct, removeProduct, addQuantity, subtractQuantity } = cart.actions;
 
 export const selectCart = (state: RootState) => state.cart.products;
+
 export const selectCartIds = (state: RootState) => state.cart.products.map((product) => product.id);
-export const selectCartProductsCount = createSelector(
-  [selectCart, (state) => state.cart.products],
-  (products) => products.length
-);
+
+export const selectCartProductById = (state: RootState, id: string) =>
+  state.cart.products.find((product) => product.id === id);
+
+export const selectTotalPrice = (state: RootState) => {
+  return state.cart.products.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
+};
+
+export const selectQuantityById = (state: RootState, id: string) =>
+  state.cart.products.find((product) => product.id === id)?.quantity ?? 1;
+
+export const selectProductCount = (state: RootState) => {
+  return state.cart.products.reduce((total, product) => total + product.quantity, 0);
+};
 
 export default cart.reducer;

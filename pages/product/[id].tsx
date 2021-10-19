@@ -2,18 +2,31 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Layout from '../../components/Layout';
 import { Product } from '../../types/Product';
-import { addProduct, removeProduct, selectCartIds } from '../../redux/cartSlice';
+import {
+  addProduct,
+  removeProduct,
+  selectCartIds,
+  selectQuantityById,
+} from '../../redux/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import QuantityInput from '../../components/QuantityInput';
 
 const ProductPage = ({ product }: { product: Product }) => {
-  const [addedToCart, setAddedToCart] = useState(false);
-  const cartIds = useAppSelector(selectCartIds);
-  const isAdded = cartIds.includes(product.id);
+  const isAdded = useAppSelector(selectCartIds).includes(product.id);
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
-    setAddedToCart(!addedToCart);
-    isAdded ? dispatch(removeProduct(product.id)) : dispatch(addProduct(product));
+    isAdded ? dispatch(removeProduct(product.id)) : dispatch(addProduct({ product, quantity }));
+  };
+
+  const addQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+  const subtractQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
   };
   return (
     <Layout>
@@ -23,12 +36,17 @@ const ProductPage = ({ product }: { product: Product }) => {
           <div className="md:w-96 lg:w-96 md:pl-8">
             <h4 className="text-2xl font-semibold mb-8">{product.name}</h4>
             <h3 className="text-2xl mb-8">${product.price}</h3>
-            <input type="number" className="border py-4 w-32 mb-8 px-4" />
+            <QuantityInput
+              quantity={quantity}
+              subtractQuantity={subtractQuantity}
+              addQuantity={addQuantity}
+            />
             <button
               className={`w-full  text-white py-4 mb-8 ${
                 isAdded ? 'bg-green-600' : 'bg-gray-900'
               } `}
               onClick={handleAddToCart}
+              disabled={isAdded}
             >
               {isAdded ? 'added' : 'add to cart'}
             </button>
