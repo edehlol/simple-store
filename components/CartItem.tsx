@@ -35,13 +35,21 @@ const CartItem = ({ product }: { product: CartProduct }) => {
         </div>
       </div>
 
-      <div className="flex items-center">
-        <QuantityInput
-          quantity={quantity}
-          addQuantity={handleAddQuantity}
-          subtractQuantity={handleSubtractQuantity}
-        />
-        <p className="ml-8 w-16">${product.price * product.quantity}</p>
+      <div className="flex flex-col md:flex-row items-center justify-between">
+        <p className="md:mr-16 lg:mr-24 xl:mr-32 font-semibold text-lg w-8 lg:w-16">
+          ${product.price}
+        </p>
+        <div className=" my-4 md:my-0">
+          <QuantityInput
+            quantity={quantity}
+            addQuantity={handleAddQuantity}
+            subtractQuantity={handleSubtractQuantity}
+          />
+        </div>
+
+        <p className="md:ml-16 lg:ml-24 xl:ml-32 w-8 lg:w-16 font-semibold text-lg">
+          ${product.price * product.quantity}
+        </p>
       </div>
     </div>
   );

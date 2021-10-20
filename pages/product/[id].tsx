@@ -17,7 +17,8 @@ const ProductPage = ({ product }: { product: Product }) => {
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
-    isAdded ? dispatch(removeProduct(product.id)) : dispatch(addProduct({ product, quantity }));
+    console.log(quantity);
+    dispatch(addProduct({ product, quantity }));
   };
 
   const addQuantity = () => {
@@ -42,11 +43,10 @@ const ProductPage = ({ product }: { product: Product }) => {
               addQuantity={addQuantity}
             />
             <button
-              className={`w-full  text-white py-4 mb-8 ${
+              className={`mt-8 w-full  text-white py-4 mb-8 ${
                 isAdded ? 'bg-green-600' : 'bg-gray-900'
               } `}
               onClick={handleAddToCart}
-              disabled={isAdded}
             >
               {isAdded ? 'added' : 'add to cart'}
             </button>
