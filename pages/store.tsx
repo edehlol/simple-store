@@ -1,15 +1,12 @@
 import Layout from '../components/Layout';
 import ProductCard from '../components/ProductCard';
+import clientPromise, { connectToCollection } from '../lib/mongodb';
+import { DbProduct } from '../types/DbProduct';
 import { Product } from '../types/Product';
-
-export const getServerSideProps = async () => {
-  const products = await fetch('http://localhost:3000/api/store').then((res) => res.json());
-  return {
-    props: products,
-  };
-};
+import { formatFetchedProducts } from '../utils/formatFetchedProducts';
 
 const Store = ({ products }: { products: Product[] }) => {
+  console.log(products);
   const renderProducts = () => {
     return products.map((product) => (
       <ProductCard key={product.id} id={product.id} name={product.name} price={product.price} />
@@ -25,6 +22,17 @@ const Store = ({ products }: { products: Product[] }) => {
       </div>
     </Layout>
   );
+};
+
+export const getServerSideProps = async () => {
+  const collection = await connectToCollection();
+  const data: DbProduct[] = await collection.find().toArray();
+
+  return {
+    props: {
+      products: formatFetchedProducts(data),
+    },
+  };
 };
 
 export default Store;
