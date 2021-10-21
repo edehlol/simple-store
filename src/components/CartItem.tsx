@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   removeProduct,
   addQuantity,
@@ -55,5 +54,3 @@ const CartItem = ({ product }: { product: CartProduct }) => {
   );
 };
 export default CartItem;
-
-// User can click on the Shopping Cart button to display the Shopping Cart page containing the product id, name, price, and quantity ordered input box for each product previously added to the Shopping Cart.

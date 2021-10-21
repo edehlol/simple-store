@@ -8,6 +8,7 @@ import QuantityInput from '../../components/QuantityInput';
 import clientPromise, { connectToCollection } from '../../lib/mongodb';
 import { ObjectId } from 'bson';
 import { formatFetchedProducts } from '../../utils/formatFetchedProducts';
+import { GetServerSideProps } from 'next';
 
 const ProductPage = ({ product }: { product: Product }) => {
   const isAdded = useAppSelector(selectCartIds).includes(product.id);
@@ -67,16 +68,16 @@ const ProductPage = ({ product }: { product: Product }) => {
     </Layout>
   );
 };
-
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.params;
   const collection = await connectToCollection();
-  const data = await collection.findOne({ _id: new ObjectId(context.params.id) });
+  const data = await collection.findOne({ _id: new ObjectId(Number(id)) });
 
   return {
     props: {
       product: formatFetchedProducts(data),
     },
   };
-}
+};
 
 export default ProductPage;
