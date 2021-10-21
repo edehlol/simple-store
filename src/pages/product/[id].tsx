@@ -69,9 +69,10 @@ const ProductPage = ({ product }: { product: Product }) => {
   );
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.query;
   const collection = await connectToCollection();
-  const data = await collection.findOne({ _id: new ObjectId(Number(context.params.id)) });
-
+  const data = await collection.findOne({ _id: new ObjectId(id as string) });
+  console.log(data);
   return {
     props: {
       product: formatFetchedProducts(data),
