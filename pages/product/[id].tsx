@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Layout from '../../components/Layout';
 import { Product } from '../../types/Product';
-import {
-  addProduct,
-  removeProduct,
-  selectCartIds,
-  selectQuantityById,
-} from '../../redux/cartSlice';
+import { addProduct, selectCartIds } from '../../redux/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import QuantityInput from '../../components/QuantityInput';
+import clientPromise, { connectToCollection } from '../../lib/mongodb';
+import { ObjectId } from 'bson';
+import { formatFetchedProducts } from '../../utils/formatFetchedProducts';
 
 const ProductPage = ({ product }: { product: Product }) => {
   const isAdded = useAppSelector(selectCartIds).includes(product.id);
@@ -71,24 +69,31 @@ const ProductPage = ({ product }: { product: Product }) => {
 };
 
 export async function getStaticPaths() {
+  const client = await clientPromise;
+  const db = client.db('bookstore');
+  const data = await db.collection('products').find({}).project({ _id: 1 }).toArray();
+
+  const paths = data.map((object: { _id: ObjectId }) => {
+    return {
+      params: {
+        id: object._id.toString(),
+      },
+    };
+  });
+
   return {
-    paths: [
-      { params: { id: '1' } },
-      { params: { id: '2' } },
-      { params: { id: '3' } },
-      { params: { id: '4' } },
-    ],
+    paths,
     fallback: false,
   };
 }
-export async function getStaticProps({ params }: { params: { id: string | number } }) {
-  const product = await fetch(`http://localhost:3000/api/product?id=${params.id}`).then((res) =>
-    res.json()
-  );
-  console.log('TESTING: ' + product);
+
+export async function getStaticProps({ params }: { params: { id: string } }) {
+  const collection = await connectToCollection();
+  const data = await collection.findOne({ _id: new ObjectId(params.id) });
+
   return {
     props: {
-      product,
+      product: formatFetchedProducts(data),
     },
   };
 }
