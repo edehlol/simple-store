@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartProduct } from '../types/CartProduct';
+import { roundPrice } from '../utils/roundPrice';
 import { RootState } from './store';
 
 interface CartState {
@@ -61,10 +62,15 @@ export const selectCartIds = (state: RootState) => state.cart.products.map((prod
 export const selectCartProductById = (state: RootState, id: string) =>
   state.cart.products.find((product) => product.id === id);
 
+export const selectSubtotalPrice = (state: RootState, id: string) => {
+  const product = selectCartProductById(state, id);
+  if (product) {
+    return roundPrice(product.price * product.quantity);
+  }
+};
 export const selectTotalPrice = (state: RootState) => {
-  return state.cart.products.reduce(
-    (total, product) => total + product.price * product.quantity,
-    0
+  return roundPrice(
+    state.cart.products.reduce((total, product) => total + product.price * product.quantity, 0)
   );
 };
 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useAppSelector } from '../redux/hooks';
 import { selectCart, selectTotalPrice } from '../redux/cartSlice';
 import { BsBag } from 'react-icons/bs';
+import { roundPrice } from '../utils/roundPrice';
 
 const Cart = () => {
   const cart = useAppSelector(selectCart);

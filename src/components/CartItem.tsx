@@ -3,6 +3,7 @@ import {
   addQuantity,
   selectQuantityById,
   subtractQuantity,
+  selectSubtotalPrice,
 } from '../redux/cartSlice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { CartProduct } from '../types/CartProduct';
@@ -11,6 +12,7 @@ import QuantityInput from './QuantityInput';
 const CartItem = ({ product }: { product: CartProduct }) => {
   const dispatch = useAppDispatch();
   const quantity = useAppSelector((state) => selectQuantityById(state, product.id));
+  const subTotal = useAppSelector((state) => selectSubtotalPrice(state, product.id));
 
   const handleRemove = () => {
     dispatch(removeProduct(product.id));
@@ -46,9 +48,7 @@ const CartItem = ({ product }: { product: CartProduct }) => {
           />
         </div>
 
-        <p className="md:ml-16 lg:ml-24 xl:ml-32 w-8 lg:w-16 font-semibold text-lg">
-          ${product.price * product.quantity}
-        </p>
+        <p className="md:ml-16 lg:ml-24 xl:ml-32 w-8 lg:w-16 font-semibold text-lg">${subTotal}</p>
       </div>
     </div>
   );
