@@ -7,6 +7,7 @@ import {
 } from '../redux/cartSlice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { CartProduct } from '../types/CartProduct';
+import Img from './Img';
 import QuantityInput from './QuantityInput';
 
 const CartItem = ({ product }: { product: CartProduct }) => {
@@ -27,7 +28,7 @@ const CartItem = ({ product }: { product: CartProduct }) => {
   return (
     <div className="p-8 mb-4 flex items-center justify-between border-b">
       <div className="flex items-center">
-        <div className="w-24 h-24 bg-gray-200 mr-16"></div>
+        <Img src={product.img} divClass="w-24 h-24 mr-16" />
         <div>
           <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
           <button className="text-yellow-500 text-sm" onClick={handleRemove}>
