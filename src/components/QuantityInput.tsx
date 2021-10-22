@@ -10,9 +10,9 @@ const QuantityInput = ({
   subtractQuantity: () => void;
 }) => {
   return (
-    <div className="flex items-center bg-gray-100 w-40">
+    <div className="w-full grid grid-cols-3 bg-gray-100 h-16 text-3xl">
       <button
-        className={`w-16 ${quantity === 1 ? 'opacity-0' : ''}`}
+        className={` text-lg font-light ${quantity === 1 ? 'opacity-0' : ''}`}
         onClick={subtractQuantity}
         disabled={quantity === 1}
       >
@@ -20,11 +20,11 @@ const QuantityInput = ({
       </button>
       <input
         type="text"
-        className=" py-4 text-center w-8 bg-gray-100 focus:outline-none"
+        className="w-full text-center bg-gray-100 focus:outline-none"
         value={quantity}
         readOnly
       />
-      <button className="w-16" onClick={addQuantity}>
+      <button className="text-lg font-light" onClick={addQuantity}>
         +
       </button>
     </div>

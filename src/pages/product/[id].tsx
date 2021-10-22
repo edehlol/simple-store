@@ -32,37 +32,41 @@ const ProductPage = ({ product }: { product: Product }) => {
   return (
     <Layout>
       <div className="xl:max-w-screen-lg mx-auto">
-        <div className="flex flex-col md:flex-row md:justify-between  mx-auto">
+        <div className="lg:grid grid-cols-1 lg:grid-cols-2 gap-x-8 md:justify-between  mx-auto">
           <Img
             src={product.img}
-            divClass={'w-full sm:w-96 md:w-80 lg:w-96 h-96 md:h-80 lg:h-96 mx-auto md:mx-0 mb-8'}
+            divClass={'w-full lg:w-96 h-96 md:h-80 lg:h-96 mx-auto md:mx-0 mb-8'}
           />
-          <div className="md:w-96 lg:w-96 md:pl-8">
-            <h4 className="text-2xl font-semibold mb-8">{product.name}</h4>
-            <h3 className="text-2xl mb-8">${product.price}</h3>
-            <QuantityInput
-              quantity={quantity}
-              subtractQuantity={subtractQuantity}
-              addQuantity={addQuantity}
-            />
-            <button
-              className={`mt-8 w-full  text-white py-4 mb-8 ${
-                isAdded ? 'bg-green-600' : 'bg-gray-900'
-              } `}
-              onClick={handleAddToCart}
-            >
-              {isAdded ? 'added' : 'add to cart'}
-            </button>
+          <div className="">
+            <h4 className="text-4xl mb-1 font-light">{product.name} —</h4>
+            <h3 className="text-3xl mb-0 font-light">${product.price}</h3>
+            <p className="mb-12">Tax included.</p>
+            <p className="text-xl mb-12 ">
+              A great about us block helps builds trust between you and your customers. The more
+              content you provide about you and your business, the more confident people will be
+              when purchasing from your store.
+            </p>
+            <p className="text-xl mb-10">Delivery</p>
+            <div className="flex flex-col sm:flex-row sm:items-center">
+              <div className="sm:w-64 sm:mr-4">
+                <QuantityInput
+                  quantity={quantity}
+                  subtractQuantity={subtractQuantity}
+                  addQuantity={addQuantity}
+                />
+              </div>
+
+              <button
+                className={`transition duration-200 ease-in-out hover:bg-white border-black hover:border hover:border-4 hover:text-black h-16 mt-8 w-full  text-white py-4 mb-8 text-xl flex justify-center items-center w-full ${
+                  isAdded ? 'bg-green-600' : 'bg-gray-900'
+                } `}
+                onClick={handleAddToCart}
+              >
+                {isAdded ? 'added' : 'Add to Cart'}
+              </button>
+            </div>
           </div>
         </div>
-
-        <h2 className="text-lg mb-4">Description</h2>
-
-        <p className="text-sm mb-16 text-gray-500">
-          long description User can click on the Shopping Cart button to display the Shopping Cart
-          page containing the product id, name, price, and quantity ordered input box for each
-          product previously added to the Shopping Cart.
-        </p>
         <button className="mb-8">
           <Link href="/store">
             <a className=" text-lg">Back to store</a>
