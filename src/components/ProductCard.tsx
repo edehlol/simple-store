@@ -1,18 +1,15 @@
 import Link from 'next/link';
+import React from 'react';
+import { Product } from '../types/Product';
+import Img from './Img';
 
-interface ProductCardProps {
-  id: string;
-  name: string;
-  price: number;
-}
-
-const ProductCard = ({ id, name, price }: ProductCardProps) => {
+const ProductCard = ({ product }: { product: Product }) => {
   return (
-    <Link href={`/product/${id}`} passHref>
+    <Link href={`/product/${product.id}`} passHref>
       <div className="mb-8 flex flex-col justify-center items-center hover:cursor-pointer">
-        <div className="bg-gray-100 h-80 xl:h-64 w-80 xl:w-64 mb-8"></div>
-        <h4 className="font-semibold mb-2">{name}</h4>
-        <p className="text-sm text-gray-500">${price}</p>
+        <Img src={product.img} divClass="h-80 xl:h-64 w-80 xl:w-64 mb-8" />
+        <h4 className="font-semibold mb-2">{product.name}</h4>
+        <p className="text-sm text-gray-500">${product.price}</p>
       </div>
     </Link>
   );

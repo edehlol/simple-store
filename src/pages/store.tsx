@@ -9,9 +9,7 @@ import { formatFetchedProducts } from '../utils/formatFetchedProducts';
 const Store = ({ products }: { products: Product[] }) => {
   console.log(products);
   const renderProducts = () => {
-    return products.map((product) => (
-      <ProductCard key={product.id} id={product.id} name={product.name} price={product.price} />
-    ));
+    return products.map((product) => <ProductCard key={product.id} product={product} />);
   };
   return (
     <Layout>

@@ -1,4 +1,5 @@
 import { DbProduct } from '../types/DbProduct';
+import { Product } from '../types/Product';
 
 export const formatFetchedProducts = (data: DbProduct[] | DbProduct) => {
   const products = JSON.parse(JSON.stringify(data));
@@ -9,6 +10,7 @@ export const formatFetchedProducts = (data: DbProduct[] | DbProduct) => {
         id: product._id.toString(),
         name: product.name,
         price: Number(product.price.$numberDecimal),
+        img: product.img,
       };
     });
   } else {
@@ -16,6 +18,7 @@ export const formatFetchedProducts = (data: DbProduct[] | DbProduct) => {
       id: products._id.toString(),
       name: products.name,
       price: Number(products.price.$numberDecimal),
-    };
+      img: products.img,
+    } as Product;
   }
 };

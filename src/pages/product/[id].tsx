@@ -5,10 +5,11 @@ import { Product } from '../../types/Product';
 import { addProduct, selectCartIds } from '../../redux/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import QuantityInput from '../../components/QuantityInput';
-import clientPromise, { connectToCollection } from '../../lib/mongodb';
+import { connectToCollection } from '../../lib/mongodb';
 import { ObjectId } from 'bson';
 import { formatFetchedProducts } from '../../utils/formatFetchedProducts';
 import { GetServerSideProps } from 'next';
+import Img from '../../components/Img';
 
 const ProductPage = ({ product }: { product: Product }) => {
   const isAdded = useAppSelector(selectCartIds).includes(product.id);
@@ -32,7 +33,10 @@ const ProductPage = ({ product }: { product: Product }) => {
     <Layout>
       <div className="xl:max-w-screen-lg mx-auto">
         <div className="flex flex-col md:flex-row md:justify-between  mx-auto">
-          <div className="bg-gray-100 w-full sm:w-96 md:w-80 lg:w-96 h-96 md:h-80 lg:h-96 mx-auto md:mx-0 mb-8"></div>
+          <Img
+            src={product.img}
+            divClass={'w-full sm:w-96 md:w-80 lg:w-96 h-96 md:h-80 lg:h-96 mx-auto md:mx-0 mb-8'}
+          />
           <div className="md:w-96 lg:w-96 md:pl-8">
             <h4 className="text-2xl font-semibold mb-8">{product.name}</h4>
             <h3 className="text-2xl mb-8">${product.price}</h3>
