@@ -21,7 +21,7 @@ const Navbar = () => {
         </div>
 
         <Link href="/">
-          <a className="text-3xl font-light hidden lg:inline-block">MyStore</a>
+          <a className="text-3xl font-light hidden lg:inline-block w-16">MyStore</a>
         </Link>
 
         <div className="flex justify-end text-xl hidden lg:block">
@@ -40,7 +40,7 @@ const Navbar = () => {
         </div>
 
         <Link href="/cart">
-          <a className="flex justify-end items-center w-12">
+          <a className="flex justify-end items-center w-16">
             <span className="flex justify-end w-full mr-1">
               <BsBag size="1.5rem" />
             </span>
@@ -55,4 +55,5 @@ const Navbar = () => {
     </>
   );
 };
+
 export default Navbar;
