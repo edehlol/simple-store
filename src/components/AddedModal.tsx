@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import Img from './Img';
 import { useAppSelector } from '../redux/hooks';
@@ -26,7 +26,7 @@ const AddedModal = ({ product, isOpen, onClose }) => {
     document.body.style.overflow = 'auto';
   });
 
-  const backgroundClickHandler = (e) => {
+  const backgroundClickHandler = (e: React.SyntheticEvent) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       onClose();
     }
