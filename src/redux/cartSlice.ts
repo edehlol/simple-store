@@ -55,30 +55,40 @@ const cart = createSlice({
 
 export const { addProduct, removeProduct, addQuantity, subtractQuantity } = cart.actions;
 
-export const selectCart = (state: RootState) => state.cart.products;
+const selectCart = (state: RootState) => state.cart.products;
 
-export const selectCartIds = (state: RootState) => state.cart.products.map((product) => product.id);
+const selectCartIds = (state: RootState) => state.cart.products.map((product) => product.id);
 
-export const selectCartProductById = (state: RootState, id: string) =>
+const selectCartProductById = (state: RootState, id: string) =>
   state.cart.products.find((product) => product.id === id);
 
-export const selectSubtotalPrice = (state: RootState, id: string) => {
+const selectSubtotalPrice = (state: RootState, id: string) => {
   const product = selectCartProductById(state, id);
   if (product) {
     return roundPrice(product.price * product.quantity);
   }
 };
-export const selectTotalPrice = (state: RootState) => {
+const selectTotalPrice = (state: RootState) => {
   return roundPrice(
     state.cart.products.reduce((total, product) => total + product.price * product.quantity, 0)
   );
 };
 
-export const selectQuantityById = (state: RootState, id: string) =>
+const selectQuantityById = (state: RootState, id: string) =>
   state.cart.products.find((product) => product.id === id)?.quantity ?? 1;
 
-export const selectProductCount = (state: RootState) => {
+const selectProductCount = (state: RootState) => {
   return state.cart.products.reduce((total, product) => total + product.quantity, 0);
+};
+
+export {
+  selectCart,
+  selectCartIds,
+  selectCartProductById,
+  selectSubtotalPrice,
+  selectTotalPrice,
+  selectQuantityById,
+  selectProductCount,
 };
 
 export default cart.reducer;
