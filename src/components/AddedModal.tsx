@@ -19,7 +19,7 @@ interface AddedModalProps {
 }
 
 const AddedModal = ({ product, isOpen, onClose }: AddedModalProps) => {
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const productCount = useAppSelector(selectProductCount);
   const quantity = useAppSelector((state) => selectQuantityById(state, product.id));
   const subTotal = useAppSelector((state) => selectSubtotalPrice(state, product.id));
