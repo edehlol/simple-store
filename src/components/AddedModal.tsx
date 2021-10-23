@@ -10,8 +10,15 @@ import {
   selectTotalPrice,
 } from '../redux/cartSlice';
 import { AiOutlineCheckCircle, AiOutlineClose } from 'react-icons/ai';
+import { Product } from '../types/Product';
 
-const AddedModal = ({ product, isOpen, onClose }) => {
+interface AddedModalProps {
+  isOpen: boolean;
+  product: Product;
+  onClose: () => void;
+}
+
+const AddedModal = ({ product, isOpen, onClose }: AddedModalProps) => {
   const modalRef = useRef(null);
   const productCount = useAppSelector(selectProductCount);
   const quantity = useAppSelector((state) => selectQuantityById(state, product.id));
