@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next';
-import Layout from '../components/Layout';
-import ProductCard from '../components/ProductCard';
-import { connectToCollection } from '../lib/mongodb';
-import { DbProduct } from '../types/DbProduct';
-import { Product } from '../types/Product';
-import { formatFetchedProducts } from '../utils/formatFetchedProducts';
+import Layout from '../../components/Layout';
+import ProductCard from '../../components/ProductCard';
+import { connectToCollection } from '../../lib/mongodb';
+import { DbProduct } from '../../types/DbProduct';
+import { Product } from '../../types/Product';
+import { formatFetchedProducts } from '../../utils/formatFetchedProducts';
 
 const Store = ({ products }: { products: Product[] }) => {
   console.log(products);
