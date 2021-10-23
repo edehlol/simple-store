@@ -30,7 +30,7 @@ const AddedModal = ({ product, isOpen, onClose }: AddedModalProps) => {
   }, [isOpen]);
 
   const backgroundClickHandler = (e: React.SyntheticEvent) => {
-    if (modalRef.current && !modalRef.current.contains(e.target)) {
+    if (modalRef.current && !modalRef.current.contains(e.target as any)) {
       onClose();
     }
   };
