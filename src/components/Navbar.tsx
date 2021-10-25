@@ -5,10 +5,24 @@ import { BsBag } from 'react-icons/bs';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useAppSelector } from '../redux/hooks';
 import MenuModal from './MenuModal';
+import navRoutes from '../nav-routes';
 
 const Navbar = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const cartProductsCount = useAppSelector(selectProductCount);
+
+  const renderNavLinks = () => {
+    let links = [];
+    for (let [key, value] of Object.entries(navRoutes)) {
+      links.push(
+        <Link href={key}>
+          <a className="mr-8">{value}</a>
+        </Link>
+      );
+    }
+    return links;
+  };
+
   return (
     <>
       <div className="lg:hidden">
@@ -24,20 +38,7 @@ const Navbar = () => {
           <a className="text-3xl font-light hidden lg:inline-block w-16">MyStore</a>
         </Link>
 
-        <div className="flex justify-end text-xl hidden lg:block">
-          <Link href="/store">
-            <a className="mr-8">Store</a>
-          </Link>
-          <Link href="/store">
-            <a className="mr-8">About</a>
-          </Link>
-          <Link href="/store">
-            <a className="mr-8">Magazine</a>
-          </Link>
-          <Link href="/store">
-            <a className="">Contacts</a>
-          </Link>
-        </div>
+        <div className="flex justify-end text-xl hidden lg:block">{renderNavLinks()}</div>
 
         <Link href="/cart">
           <a className="flex justify-end items-center w-16">

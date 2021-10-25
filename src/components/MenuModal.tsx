@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
+import navRoutes from '../nav-routes';
 
 interface MenuModalProps {
   isOpen: boolean;
@@ -20,6 +21,20 @@ const MenuModal = ({ isOpen, onClose }: MenuModalProps) => {
     }
   };
 
+  const renderNavLinks = () => {
+    let links = [];
+    for (let [key, value] of Object.entries(navRoutes)) {
+      links.push(
+        <Link key={key} href={key}>
+          <a onClick={onClose} className="mb-4">
+            {value}
+          </a>
+        </Link>
+      );
+    }
+    return links;
+  };
+
   const modalContent = isOpen ? (
     <div
       onClick={backgroundClickHandler}
@@ -31,28 +46,7 @@ const MenuModal = ({ isOpen, onClose }: MenuModalProps) => {
             X Close
           </button>
         </div>
-        <div className="p-8 flex flex-col">
-          <Link href="/store">
-            <a onClick={onClose} className="mb-4">
-              Store
-            </a>
-          </Link>
-          <Link href="/store">
-            <a onClick={onClose} className="mb-4">
-              About
-            </a>
-          </Link>
-          <Link href="/store">
-            <a onClick={onClose} className="mb-4">
-              Magazine
-            </a>
-          </Link>
-          <Link href="/store">
-            <a onClick={onClose} className="mb-4">
-              Contacts
-            </a>
-          </Link>
-        </div>
+        <div className="p-8 flex flex-col">{renderNavLinks()}</div>
       </div>
     </div>
   ) : null;
