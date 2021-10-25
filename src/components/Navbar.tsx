@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { selectProductCount } from '../redux/cartSlice';
-import { BsBag } from 'react-icons/bs';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useAppSelector } from '../redux/hooks';
 import MenuModal from './MenuModal';
 import navRoutes from '../nav-routes';
+import CartPopover from './CartPopover';
 
 const Navbar = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -40,18 +40,7 @@ const Navbar = () => {
 
         <div className="flex justify-end text-xl hidden lg:block">{renderNavLinks()}</div>
 
-        <Link href="/cart">
-          <a className="flex justify-end items-center w-16">
-            <span className="flex justify-end w-full mr-1">
-              <BsBag size="1.5rem" />
-            </span>
-            {cartProductsCount > 0 && (
-              <span className="absolute top-4 right-6 ml-2 rounded-full bg-red-500 text-white w-5 h-5 text-xs flex items-center justify-center">
-                {cartProductsCount}
-              </span>
-            )}
-          </a>
-        </Link>
+        <CartPopover cartProductsCount={cartProductsCount} />
       </div>
     </>
   );
