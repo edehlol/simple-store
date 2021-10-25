@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply transition duration-200 ease-in-out border-2 flex justify-center items-center box-border py-3  px-5 text-lg  rounded;
+  }
+}

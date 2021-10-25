@@ -11,6 +11,7 @@ import {
 } from '../redux/cartSlice';
 import { AiOutlineCheckCircle, AiOutlineClose } from 'react-icons/ai';
 import { Product } from '../types/Product';
+import PrimaryBtn from './PrimaryBtn';
 
 interface AddedModalProps {
   isOpen: boolean;
@@ -73,22 +74,12 @@ const AddedModal = ({ product, isOpen, onClose }: AddedModalProps) => {
                 There are {productCount} items in your cart
               </h3>
               <h4 className="hidden lg:block mb-8 font-light text-xl">Total: ${selectTotal}</h4>
-              <Link href="/store">
-                <a
-                  className="hover:bg-gray-900 hover:text-white transition duration-200 mb-4 block lg:border-2 border-black py-2"
-                  onClick={onClose}
-                >
-                  Continue Shopping
-                </a>
-              </Link>
-              <Link href="/cart">
-                <a
-                  className="hover:bg-gray-900 hover:text-white transition duration-200 mb-8 block lg:border-2 border-black py-2"
-                  onClick={onClose}
-                >
-                  View Cart
-                </a>
-              </Link>
+              <PrimaryBtn onClick={onClose} className="mb-4" inverted link="/store">
+                Continue Shopping
+              </PrimaryBtn>
+              <PrimaryBtn onClick={onClose} className="mb-4" inverted link="/cart">
+                View Cart
+              </PrimaryBtn>
             </div>
 
             <Link href="#">

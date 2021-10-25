@@ -6,6 +6,7 @@ import { clearCart, selectCart, selectTotalPrice } from '../redux/cartSlice';
 import { BsBag } from 'react-icons/bs';
 import { roundPrice } from '../utils/roundPrice';
 import { AiOutlineArrowLeft, AiOutlineDelete } from 'react-icons/ai';
+import PrimaryBtn from '../components/PrimaryBtn';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -45,9 +46,7 @@ const Cart = () => {
           </div>
           <div className="flex flex-col items-center mb-24 border p-16">
             <h2 className="text-4xl text-right mb-4">${totalPrice}</h2>
-            <button className=" py-3 px-5 text-lg bg-black text-white" onClick={handlePlaceOrder}>
-              Proceed to Checkout
-            </button>
+            <PrimaryBtn onClick={handlePlaceOrder}>Proceed to Checkout</PrimaryBtn>
           </div>
         </div>
       )}

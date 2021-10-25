@@ -11,6 +11,7 @@ import { formatFetchedProducts } from '../../utils/formatFetchedProducts';
 import { GetServerSideProps } from 'next';
 import Img from '../../components/Img';
 import AddedModal from '../../components/AddedModal';
+import PrimaryBtn from '../../components/PrimaryBtn';
 
 const ProductPage = ({ product }: { product: Product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -60,12 +61,15 @@ const ProductPage = ({ product }: { product: Product }) => {
                   />
                 </div>
 
-                <button
+                {/* <button
                   className={`transition duration-200 ease-in-out hover:bg-white border-gray-900 hover:border-2 hover:text-black h-16 mt-8  text-white py-4 mb-8 text-xl flex justify-center items-center w-full bg-gray-900 `}
                   onClick={handleAddToCart}
                 >
                   Add to Cart
-                </button>
+                </button> */}
+                <PrimaryBtn onClick={handleAddToCart} className="h-16">
+                  Add to Cart
+                </PrimaryBtn>
               </div>
             </div>
           </div>
