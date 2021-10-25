@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { CartProduct } from '../types/CartProduct';
 import Img from './Img';
 import QuantityInput from './QuantityInput';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 const CartItem = ({ product }: { product: CartProduct }) => {
   const dispatch = useAppDispatch();
@@ -26,31 +27,28 @@ const CartItem = ({ product }: { product: CartProduct }) => {
     dispatch(subtractQuantity(product.id));
   };
   return (
-    <div className="p-8 mb-4 flex items-center justify-between border-b">
-      <div className="flex items-center">
-        <Img src={product.img} divClass="w-24 h-24 mr-16" />
-        <div>
-          <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-          <button className="text-yellow-500 text-sm" onClick={handleRemove}>
-            Remove
-          </button>
-        </div>
-      </div>
+    <div className=" py-4 mb-4 grid grid-cols-3 md:grid-cols-12  border-b h-48">
+      <Img src={product.img} divClass="w-full h-full md:col-span-2" />
 
-      <div className="flex flex-col md:flex-row items-center justify-between">
-        <p className="md:mr-16 lg:mr-24 xl:mr-32 font-semibold text-lg w-8 lg:w-16">
-          ${product.price}
-        </p>
-        <div className=" my-4 md:my-0">
+      <div className="ml-4 md:ml-8 grid grid-cols-1 grid-rows-4 md:grid-rows-1 md:grid-cols-5 md:col-span-9 h-full">
+        <h3 className="self-center md:justify-self-start md:col-span-2 items-start">
+          {product.name}
+        </h3>
+        <p className="md:place-self-center font-light items-start  w-8 ">${product.price}</p>
+        <div className="place-self-center w-full md:w-32">
           <QuantityInput
+            small
             quantity={quantity}
             addQuantity={handleAddQuantity}
             subtractQuantity={handleSubtractQuantity}
           />
         </div>
-
-        <p className="md:ml-16 lg:ml-24 xl:ml-32 w-8 lg:w-16 font-semibold text-lg">${subTotal}</p>
+        <p className="self-center md:justify-self-center w-8 font-light items-start">${subTotal}</p>
       </div>
+
+      <button className="place-self-end self-center md:col-span-1 text-lg" onClick={handleRemove}>
+        <AiOutlineDelete />
+      </button>
     </div>
   );
 };

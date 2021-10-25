@@ -1,12 +1,14 @@
 import CartItem from '../components/CartItem';
 import Layout from '../components/Layout';
 import Link from 'next/link';
-import { useAppSelector } from '../redux/hooks';
-import { selectCart, selectTotalPrice } from '../redux/cartSlice';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { clearCart, selectCart, selectTotalPrice } from '../redux/cartSlice';
 import { BsBag } from 'react-icons/bs';
 import { roundPrice } from '../utils/roundPrice';
+import { AiOutlineArrowLeft, AiOutlineDelete } from 'react-icons/ai';
 
 const Cart = () => {
+  const dispatch = useAppDispatch();
   const cart = useAppSelector(selectCart);
   const totalPrice = useAppSelector(selectTotalPrice);
 
@@ -21,12 +23,30 @@ const Cart = () => {
     <Layout>
       {cart.length > 0 && (
         <div className="mt-16">
-          <h1 className="text-4xl mb-8 text-center">Shopping Cart</h1>
+          <h1 className="text-4xl pb-8 text-center font-light border-b">Shopping Cart</h1>
           <div className="mb-8">{renderCartProducts()}</div>
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col md:flex-row justify-center md:justify-between items-center mb-24">
+            <Link href="/store">
+              <a className="flex items-center mb-4 md:mb-0">
+                <span className="mr-2">
+                  <AiOutlineArrowLeft />
+                </span>
+                Continue Shopping
+              </a>
+            </Link>
+            <button onClick={() => dispatch(clearCart())}>
+              <a className="flex items-center">
+                Clear Shopping Cart
+                <span className="ml-2">
+                  <AiOutlineDelete />
+                </span>
+              </a>
+            </button>
+          </div>
+          <div className="flex flex-col items-center mb-24 border p-16">
             <h2 className="text-4xl text-right mb-4">${totalPrice}</h2>
             <button className=" py-3 px-5 text-lg bg-black text-white" onClick={handlePlaceOrder}>
-              Check out
+              Proceed to Checkout
             </button>
           </div>
         </div>

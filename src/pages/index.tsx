@@ -27,7 +27,9 @@ const Home = ({ products }: { products: Product[] }) => {
       </div>
       <div className="w-full mb-16 flex justify-center">
         <Link href="/store">
-          <a className="py-3 px-5 rounded  text-xl bg-black text-white">View products</a>
+          <a className="py-3 px-5 rounded border-2 border-black  text-xl text-black">
+            View products
+          </a>
         </Link>
       </div>
     </Layout>
@@ -37,7 +39,7 @@ const Home = ({ products }: { products: Product[] }) => {
 export const getStaticProps: GetStaticProps = async () => {
   const collection = await connectToCollection();
   console.log(collection);
-  const products = await collection.find({}).toArray();
+  const products = await collection.find({}).limit(6).toArray();
 
   return {
     props: {

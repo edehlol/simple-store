@@ -36,6 +36,9 @@ const cart = createSlice({
     removeProduct(state, action: PayloadAction<string>) {
       state.products = state.products.filter((product) => product.id !== action.payload);
     },
+    clearCart(state, action: PayloadAction<void>) {
+      state.products = [];
+    },
     addQuantity(state, action: PayloadAction<string>) {
       const id = action.payload;
       const existingProduct = state.products.find((product) => product.id === id);
@@ -53,7 +56,7 @@ const cart = createSlice({
   },
 });
 
-export const { addProduct, removeProduct, addQuantity, subtractQuantity } = cart.actions;
+export const { addProduct, removeProduct, addQuantity, subtractQuantity, clearCart } = cart.actions;
 
 const selectCart = (state: RootState) => state.cart.products;
 

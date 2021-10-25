@@ -13,7 +13,7 @@ const GridItem = ({ product }: { product: Product }) => {
 
       <div className="relative mx-2 mt-2">
         <h3 className="text-xl">{product.name}</h3>
-        <h4 className="text-lg font-light">${product.price}</h4>
+        <h4 className="text-lg font-light text-gray-600">${product.price}</h4>
       </div>
     </div>
   );

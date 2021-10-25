@@ -42,15 +42,15 @@ const ProductPage = ({ product }: { product: Product }) => {
               divClass={'w-full lg:w-96 h-96 md:h-80 lg:h-96 mx-auto md:mx-0 mb-8'}
             />
             <div className="">
-              <h4 className="text-4xl mb-1 font-light">{product.name} —</h4>
-              <h3 className="text-3xl mb-0 font-light">${product.price}</h3>
-              <p className="mb-12">Tax included.</p>
+              <h4 className="text-4xl mb-1 font-light">{product.name}</h4>
+              <h3 className="text-2xl mb-0 font-light">${product.price}</h3>
+              <p className="mb-12 text-sm">Tax included.</p>
               <p className="text-xl mb-12 ">
                 A great about us block helps builds trust between you and your customers. The more
                 content you provide about you and your business, the more confident people will be
                 when purchasing from your store.
               </p>
-              <p className="text-xl mb-10">Delivery</p>
+              <p className="text-xl mb-10"></p>
               <div className="flex flex-col sm:flex-row sm:items-center">
                 <div className="sm:w-64 sm:mr-4">
                   <QuantityInput
