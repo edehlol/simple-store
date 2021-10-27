@@ -46,7 +46,10 @@ const CartItem = ({ product }: { product: CartProduct }) => {
         <p className="self-center md:justify-self-center w-8 font-light items-start">${subTotal}</p>
       </div>
 
-      <button className="place-self-end self-center md:col-span-1 text-lg" onClick={handleRemove}>
+      <button
+        className="place-self-end self-center md:col-span-1 text-lg hover:scale-110 duration-75"
+        onClick={handleRemove}
+      >
         <AiOutlineDelete />
       </button>
     </div>
