@@ -29,7 +29,7 @@ const Navbar = () => {
         <MenuModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       </div>
 
-      <div className="h-16 w-full flex items-center justify-between px-8 mb-16">
+      <div className="h-16 w-full flex items-center justify-between px-8 mb-16 max-w-screen-lg mx-auto">
         <div onClick={() => setModalOpen(true)} className="lg:hidden hover:cursor-pointer">
           <AiOutlineMenu size="1.25rem" />
         </div>
@@ -38,7 +38,7 @@ const Navbar = () => {
           <a className="text-3xl font-light hidden lg:inline-block w-16">MyStore</a>
         </Link>
 
-        <div className="flex justify-end text-xl hidden lg:block">{renderNavLinks()}</div>
+        <div className="justify-end text-xl hidden lg:block">{renderNavLinks()}</div>
 
         <CartPopover cartProductsCount={cartProductsCount} />
       </div>

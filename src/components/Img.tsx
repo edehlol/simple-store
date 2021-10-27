@@ -10,7 +10,7 @@ interface ImgProps {
 const Img = ({ src, divClass, imgClass, alt }: ImgProps) => {
   return (
     <div className={`relative ${divClass}`}>
-      <Image src={src} layout="fill" className={`object-cover ${imgClass}`} alt={alt} />
+      <Image src={src} layout="fill" className={`object-cover rounded-lg ${imgClass}`} alt={alt} />
     </div>
   );
 };

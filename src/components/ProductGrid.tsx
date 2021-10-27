@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const GridItem = ({ product }: { product: Product }) => {
   return (
-    <div className="w-full h-72 sm:h-96 ">
+    <div className="w-full h-72 sm:h-96 rounded-lg bg-gray-100">
       <Link href={`/product/${product.id}`} passHref>
         <a>
           <Img src={product.img} divClass="w-full h-full" imgClass="object-cover" />

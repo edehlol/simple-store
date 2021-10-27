@@ -5,7 +5,7 @@ import { BsBag } from 'react-icons/bs';
 
 const CartPopover = ({ cartProductsCount }: { cartProductsCount: number }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,7 +34,7 @@ const CartPopover = ({ cartProductsCount }: { cartProductsCount: number }) => {
 
   const dialog = (
     <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="fixed">
-      <Dialog.Overlay className="bg-black z-100 w-screen h-screen" />
+      <Dialog.Overlay className="bg-black z-100 w-screen h-screen fixed top-0" />
       <div>
         <Dialog.Title>Cart</Dialog.Title>
         <p>Testing</p>
@@ -43,12 +43,14 @@ const CartPopover = ({ cartProductsCount }: { cartProductsCount: number }) => {
     </Dialog>
   );
   const popover = (
-    <Popover className="relative z-10">
+    <Popover className="relative z-10 rounded-lg">
       <Popover.Button>{cartBtn}</Popover.Button>
       <Popover.Panel className="absolute -left-48 bg-white shadow-lg">
-        <div className="border w-64 h-96 flex flex-col justify-center items-center">
-          <PrimaryBtn className="w-48 h-12 text-sm mb-4">Proceed to Checkout</PrimaryBtn>
-          <PrimaryBtn inverted className="w-48 h-12 text-sm border-none">
+        <div className="border rounded-lg w-64 h-96 flex flex-col justify-center items-center">
+          <PrimaryBtn link="#" className="w-48 h-12 text-sm mb-4">
+            Proceed to Checkout
+          </PrimaryBtn>
+          <PrimaryBtn link="/cart" className="w-48 h-12 text-sm ">
             Go to Cart
           </PrimaryBtn>
         </div>
@@ -56,7 +58,7 @@ const CartPopover = ({ cartProductsCount }: { cartProductsCount: number }) => {
     </Popover>
   );
 
-  return windowWidth > 768 ? popover : dialog;
+  return popover;
 };
 
 export default CartPopover;

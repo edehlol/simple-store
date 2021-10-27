@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
 import Layout from '../../components/Layout';
 import { Product } from '../../types/Product';
 import { addProduct } from '../../redux/cartSlice';
@@ -10,8 +9,9 @@ import { ObjectId } from 'bson';
 import { formatFetchedProducts } from '../../utils/formatFetchedProducts';
 import { GetServerSideProps } from 'next';
 import Img from '../../components/Img';
-import AddedModal from '../../components/AddedModal';
+import AddToCartModal from '../../components/AddToCartModal';
 import PrimaryBtn from '../../components/PrimaryBtn';
+import { ContinueShoppingBtn } from '../../components/ContinueShoppingBtn';
 
 const ProductPage = ({ product }: { product: Product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -20,7 +20,6 @@ const ProductPage = ({ product }: { product: Product }) => {
 
   const handleAddToCart = () => {
     dispatch(addProduct({ product, quantity }));
-    setIsModalOpen(true);
   };
 
   const addQuantity = () => {
@@ -33,7 +32,7 @@ const ProductPage = ({ product }: { product: Product }) => {
   };
   return (
     <>
-      <AddedModal product={product} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {/* <AddedModal product={product} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
 
       <Layout>
         <div className="xl:max-w-screen-lg mx-auto ">
@@ -60,26 +59,20 @@ const ProductPage = ({ product }: { product: Product }) => {
                     addQuantity={addQuantity}
                   />
                 </div>
+                <div onClick={handleAddToCart}>
+                  <AddToCartModal product={product} />
+                </div>
 
-                {/* <button
-                  className={`transition duration-200 ease-in-out hover:bg-white border-gray-900 hover:border-2 hover:text-black h-16 mt-8  text-white py-4 mb-8 text-xl flex justify-center items-center w-full bg-gray-900 `}
-                  onClick={handleAddToCart}
-                >
+                {/* <PrimaryBtn onClick={handleAddToCart} className="h-16 mt-4 sm:mt-0">
                   Add to Cart
-                </button> */}
-                <PrimaryBtn onClick={handleAddToCart} className="h-16">
-                  Add to Cart
-                </PrimaryBtn>
+                </PrimaryBtn> */}
               </div>
             </div>
           </div>
-          <button className="mb-8">
-            <Link href="/store">
-              <a className=" text-lg">Back to store</a>
-            </Link>
-          </button>
+          <div className="my-8">
+            <ContinueShoppingBtn />
+          </div>
         </div>
-        <div className="hidden">I am a modal</div>
       </Layout>
     </>
   );
