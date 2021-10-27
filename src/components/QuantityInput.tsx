@@ -7,7 +7,7 @@ const QuantityInput = ({
   small,
 }: {
   quantity: number;
-  addQuantity: any;
+  addQuantity: () => void;
   subtractQuantity: () => void;
   small?: boolean;
 }) => {
@@ -18,7 +18,7 @@ const QuantityInput = ({
       }`}
     >
       <button
-        className={` text-lg text-gray-300 hover:text-black font-light ${
+        className={` text-lg text-gray-500 hover:text-black font-light ${
           quantity === 1 ? 'opacity-0' : ''
         }`}
         onClick={subtractQuantity}
@@ -28,14 +28,11 @@ const QuantityInput = ({
       </button>
       <input
         type="text"
-        className="w-full text-center bg-gray-100 focus:outline-none"
+        className="w-full text-center bg-gray-100 focus:outline-none hover:cursor-default"
         value={quantity}
         readOnly
       />
-      <button
-        className="text-lg text-gray-300 hover:text-black text-lg font-light"
-        onClick={addQuantity}
-      >
+      <button className="text-lg text-gray-500 hover:text-black  font-light" onClick={addQuantity}>
         +
       </button>
     </div>

@@ -1,12 +1,11 @@
 import CartItem from '../components/CartItem';
 import Layout from '../components/Layout';
-import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { clearCart, selectCart, selectTotalPrice } from '../redux/cartSlice';
 import { BsBag } from 'react-icons/bs';
-import { roundPrice } from '../utils/roundPrice';
-import { AiOutlineArrowLeft, AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
 import PrimaryBtn from '../components/PrimaryBtn';
+import { ContinueShoppingBtn } from '../components/ContinueShoppingBtn';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +13,7 @@ const Cart = () => {
   const totalPrice = useAppSelector(selectTotalPrice);
 
   const handlePlaceOrder = () => {
-    alert('Order Placed: confirmation number #421410');
+    alert('There is no checkout process, im sorry :(');
   };
 
   const renderCartProducts = () => {
@@ -27,14 +26,7 @@ const Cart = () => {
           <h1 className="text-4xl pb-8 text-center font-light border-b">Shopping Cart</h1>
           <div className="mb-8">{renderCartProducts()}</div>
           <div className="flex flex-col md:flex-row justify-center md:justify-between items-center mb-24">
-            <Link href="/store">
-              <a className="flex items-center mb-4 md:mb-0">
-                <span className="mr-2">
-                  <AiOutlineArrowLeft />
-                </span>
-                Continue Shopping
-              </a>
-            </Link>
+            <ContinueShoppingBtn />
             <button onClick={() => dispatch(clearCart())}>
               <a className="flex items-center">
                 Clear Shopping Cart
@@ -44,7 +36,7 @@ const Cart = () => {
               </a>
             </button>
           </div>
-          <div className="flex flex-col items-center mb-24 border p-16">
+          <div className="flex flex-col items-center mb-24 border rounded-lg p-16">
             <h2 className="text-4xl text-right mb-4">${totalPrice}</h2>
             <PrimaryBtn onClick={handlePlaceOrder}>Proceed to Checkout</PrimaryBtn>
           </div>
@@ -57,9 +49,7 @@ const Cart = () => {
           </span>
           <h1 className="text-4xl mb-4">SHOPPING CART IS EMPTY</h1>
           <p className="text-gray-500 mb-8">You have no items in your shopping cart</p>
-          <Link href="store">
-            <a className="bg-blue-500 py-3 px-5 rounded text-white text-lg">Continue shopping</a>
-          </Link>
+          <PrimaryBtn link="/store">Continue Shopping</PrimaryBtn>
         </div>
       )}
     </Layout>
