@@ -10,16 +10,18 @@ import { formatFetchedProducts } from '../../utils/formatFetchedProducts';
 import { GetServerSideProps } from 'next';
 import Img from '../../components/Img';
 import AddToCartModal from '../../components/AddToCartModal';
-import PrimaryBtn from '../../components/PrimaryBtn';
 import { ContinueShoppingBtn } from '../../components/ContinueShoppingBtn';
 
 const ProductPage = ({ product }: { product: Product }) => {
   const [quantity, setQuantity] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
     dispatch(addProduct({ product, quantity }));
+    const timeout = setTimeout(() => {
+      setQuantity(1);
+    }, 1000);
+    return () => clearTimeout(timeout);
   };
 
   const addQuantity = () => {
@@ -32,8 +34,6 @@ const ProductPage = ({ product }: { product: Product }) => {
   };
   return (
     <>
-      {/* <AddedModal product={product} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
-
       <Layout>
         <div className="xl:max-w-screen-lg mx-auto ">
           <div className="lg:grid grid-cols-1 lg:grid-cols-2 gap-x-8 md:justify-between mx-auto">
@@ -62,10 +62,6 @@ const ProductPage = ({ product }: { product: Product }) => {
                 <div onClick={handleAddToCart}>
                   <AddToCartModal product={product} />
                 </div>
-
-                {/* <PrimaryBtn onClick={handleAddToCart} className="h-16 mt-4 sm:mt-0">
-                  Add to Cart
-                </PrimaryBtn> */}
               </div>
             </div>
           </div>

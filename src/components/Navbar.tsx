@@ -15,7 +15,7 @@ const Navbar = () => {
     let links = [];
     for (let [key, value] of Object.entries(navRoutes)) {
       links.push(
-        <Link href={key}>
+        <Link key={key} href={key}>
           <a className="mr-8">{value}</a>
         </Link>
       );
@@ -29,7 +29,7 @@ const Navbar = () => {
         <MenuModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       </div>
 
-      <div className="h-16 w-full flex items-center justify-between px-8 mb-16 max-w-screen-lg mx-auto">
+      <div className="h-16 w-full flex items-center justify-between px-8 mb-16 max-w-screen-xl mx-auto">
         <div onClick={() => setModalOpen(true)} className="lg:hidden hover:cursor-pointer">
           <AiOutlineMenu size="1.25rem" />
         </div>
