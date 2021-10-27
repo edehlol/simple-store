@@ -1,56 +1,61 @@
 import ReactDOM from 'react-dom';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
-import navRoutes from '../nav-routes';
+import { useState } from 'react';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { Dialog, Transition } from '@headlessui/react';
+import { AiOutlineClose } from 'react-icons/ai';
 
-interface MenuModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+const MenuModal = ({ renderLinks }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-const MenuModal = ({ isOpen, onClose }: MenuModalProps) => {
-  const modalRef = useRef<HTMLDivElement>(null);
+  return (
+    <>
+      <button className="lg:hidden hover:cursor-pointer" onClick={() => setIsOpen(true)}>
+        <AiOutlineMenu size="1.25rem" />
+      </button>
 
-  useEffect(() => {
-    isOpen ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'auto');
-  }, [isOpen]);
-
-  const backgroundClickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      onClose();
-    }
-  };
-
-  const renderNavLinks = () => {
-    let links = [];
-    for (let [key, value] of Object.entries(navRoutes)) {
-      links.push(
-        <Link key={key} href={key}>
-          <a onClick={onClose} className="mb-4">
-            {value}
-          </a>
-        </Link>
-      );
-    }
-    return links;
-  };
-
-  const modalContent = isOpen ? (
-    <div
-      onClick={backgroundClickHandler}
-      className="lg:hidden transition hover:transform-y-48 fixed left-0 top-0 w-full h-full bg-black bg-opacity-50"
-    >
-      <div ref={modalRef} className="w-64 h-full bg-white">
-        <div className="border-b h-14 p-4 px-8">
-          <button onClick={onClose} className="text-sm">
-            X Close
-          </button>
-        </div>
-        <div className="p-8 flex flex-col">{renderNavLinks()}</div>
-      </div>
-    </div>
-  ) : null;
-  return ReactDOM.createPortal(modalContent, document.getElementById('modal-root'));
+      <Dialog
+        unmount
+        className="fixed z-10 inset-0 overflow-y-auto"
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
+        <Transition
+          appear
+          show={isOpen}
+          enter="transition duration-150"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition duration-150"
+          leaveFrom="opacity-500"
+          leaveTo="opacity-0"
+        >
+          <div className="flex w-screen h-screen">
+            <Dialog.Overlay className="bg-black opacity-30  fixed inset-0" />
+            <Transition.Child
+              enter="transform-gpu duration-300"
+              enterFrom="-translate-x-96"
+              enterTo="translate-x-0"
+              leave="transform-gpu duration-300"
+              leaveFrom="translate-x-0"
+              leaveTo="-translate-x-96"
+            >
+              <div>
+                <div className="fixed left-0 top-0 bottom-0 h-screen w-64 bg-white shadow-2xl">
+                  <div className="border-b px-8 py-4">
+                    <button onClick={() => setIsOpen(false)} className="flex items-center">
+                      <AiOutlineClose size="1.125rem" /> <span className="ml-1">Close</span>
+                    </button>
+                  </div>
+                  <div className="flex flex-col gap-8 text-lg px-8 pt-8">{renderLinks()}</div>
+                  <input />
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Transition>
+      </Dialog>
+    </>
+  );
 };
-
 export default MenuModal;
