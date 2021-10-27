@@ -8,7 +8,6 @@ import navRoutes from '../nav-routes';
 import CartPopover from './CartPopover';
 
 const Navbar = () => {
-  const [modalOpen, setModalOpen] = useState(false);
   const cartProductsCount = useAppSelector(selectProductCount);
 
   const renderNavLinks = () => {
@@ -25,14 +24,8 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="lg:hidden">
-        <MenuModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-      </div>
-
       <div className="h-16 w-full flex items-center justify-between px-8 mb-16 max-w-screen-xl mx-auto">
-        <div onClick={() => setModalOpen(true)} className="lg:hidden hover:cursor-pointer">
-          <AiOutlineMenu size="1.25rem" />
-        </div>
+        <MenuModal renderLinks={renderNavLinks} />
 
         <Link href="/">
           <a className="text-3xl font-light hidden lg:inline-block w-16">MyStore</a>
