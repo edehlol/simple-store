@@ -1,6 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { useEffect, useState } from 'react';
-import PrimaryBtn from './PrimaryBtn';
+import { useState } from 'react';
 import { AiOutlineCheckCircle, AiOutlineClose } from 'react-icons/ai';
 import Img from './Img';
 import { useAppSelector } from '../redux/hooks';
