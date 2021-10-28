@@ -40,7 +40,6 @@ const Cart = () => {
           <div className="flex flex-col items-center mb-24 border rounded-lg p-16">
             <h2 className="text-4xl text-right mb-4">${totalPrice}</h2>
             <Button onClick={handlePlaceOrder}>Proceed to Checkout</Button>
-            {/* <PrimaryBtn onClick={handlePlaceOrder}>Proceed to Checkout</PrimaryBtn> */}
           </div>
         </div>
       )}
