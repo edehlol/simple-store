@@ -51,7 +51,7 @@ const ProductPage = ({ product }: { product: Product }) => {
                 when purchasing from your store.
               </p>
               <p className="text-xl mb-10"></p>
-              <div className="flex flex-col sm:flex-row sm:items-center">
+              <div className="flex justify-end flex-col sm:flex-row sm:items-center">
                 <div className="sm:w-64 sm:mr-4">
                   <QuantityInput
                     quantity={quantity}

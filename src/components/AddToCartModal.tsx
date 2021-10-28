@@ -12,6 +12,7 @@ import {
   selectTotalPrice,
 } from '../redux/cartSlice';
 import { Product } from '../types/Product';
+import Button from './Button';
 
 const ModalContent = ({ product, handleClose }) => {
   const productCount = useAppSelector(selectProductCount);
@@ -40,12 +41,14 @@ const ModalContent = ({ product, handleClose }) => {
             There are {productCount} items in your cart
           </h3>
           <h4 className="hidden lg:block mb-8 font-light text-xl">Total: ${selectTotal}</h4>
-          <PrimaryBtn onClick={handleClose} className="mb-4" inverted link="/store">
-            Continue Shopping
-          </PrimaryBtn>
-          <PrimaryBtn onClick={handleClose} className="mb-4" inverted link="/cart">
-            View Cart
-          </PrimaryBtn>
+          <div className="flex flex-col">
+            <Button onClick={handleClose} className="mb-4">
+              <Link href="/store">Continue Shopping</Link>
+            </Button>
+            <Button onClick={handleClose} variant="secondary" className="mb-4">
+              <Link href="/cart">View Cart</Link>
+            </Button>
+          </div>
         </div>
 
         <Link href="#">
@@ -65,7 +68,10 @@ const AddToCartModal = ({ product }: { product: Product }) => {
 
   return (
     <>
-      <PrimaryBtn onClick={handleOpen}>Add to Cart</PrimaryBtn>
+      <Button onClick={handleOpen} className="w-full mt-4 sm:mt-0 sm:w-auto h-16">
+        Add to Cart
+      </Button>
+      {/* <PrimaryBtn onClick={handleOpen}>Add to Cart</PrimaryBtn> */}
       <Transition appear show={isOpen}>
         <Dialog open={isOpen} onClose={handleClose} className="fixed inset-0 z-10 overflow-auto">
           <Dialog.Overlay className="bg-black opacity-30 fixed inset-0" />

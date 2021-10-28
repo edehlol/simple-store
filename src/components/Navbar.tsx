@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import Link from 'next/link';
 import { selectProductCount } from '../redux/cartSlice';
-import { AiOutlineMenu } from 'react-icons/ai';
 import { useAppSelector } from '../redux/hooks';
 import MenuModal from './MenuModal';
 import navRoutes from '../nav-routes';
@@ -25,7 +23,7 @@ const Navbar = () => {
   return (
     <>
       <div className="h-16 w-full flex items-center justify-between px-8 mb-16 max-w-screen-xl mx-auto">
-        <MenuModal renderLinks={renderNavLinks} />
+        <MenuModal />
 
         <Link href="/">
           <a className="text-3xl font-light hidden lg:inline-block w-16">MyStore</a>

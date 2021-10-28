@@ -12,8 +12,8 @@ const GridItem = ({ product }: { product: Product }) => {
       </Link>
 
       <div className="relative mx-2 mt-2">
-        <h3 className="text-xl">{product.name}</h3>
-        <h4 className="text-lg font-light text-gray-600">${product.price}</h4>
+        <h3 className="text-xl font-semibold">{product.name}</h3>
+        <h4 className="text-lg font-light text-gray-700 h">${product.price}</h4>
       </div>
     </div>
   );

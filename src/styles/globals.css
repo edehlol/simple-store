@@ -6,4 +6,10 @@
   .btn-primary {
     @apply transition duration-200 ease-in-out border-2 flex justify-center items-center box-border py-3  px-5 text-lg  rounded;
   }
+  .primary {
+    @apply bg-purple-500 hover:bg-purple-600 active:bg-purple-700 text-white;
+  }
+  .secondary {
+    @apply bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white;
+  }
 }

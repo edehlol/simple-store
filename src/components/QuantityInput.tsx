@@ -13,7 +13,7 @@ const QuantityInput = ({
 }) => {
   return (
     <div
-      className={`rounded w-full grid grid-cols-3 bg-gray-100  ${
+      className={`rounded-lg w-full grid grid-cols-3 bg-gray-100  ${
         small ? 'text-normal h-12' : 'text-3xl h-16'
       }`}
     >

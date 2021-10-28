@@ -20,7 +20,7 @@ const PrimaryBtn = ({
         onClick={onClick}
         className={`${
           inverted
-            ? 'hover:bg-black border-black bg-white hover:text-white'
+            ? ' border-black bg-blue-500  hover:bg-blue-600 active:bg-blue-700 text-white'
             : 'hover:bg-white border-black bg-black text-white hover:text-black'
         }  btn-primary ${className}`}
       >
@@ -32,7 +32,7 @@ const PrimaryBtn = ({
       onClick={onClick}
       className={`${
         inverted
-          ? 'hover:bg-black border-black bg-white hover:text-white'
+          ? 'hover:bg-gray-400 border-black bg-white hover:text-black'
           : 'hover:bg-white border-black bg-black text-white hover:text-black'
       }  btn-primary ${className}`}
     >

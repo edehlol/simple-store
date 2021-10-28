@@ -4,8 +4,9 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { clearCart, selectCart, selectTotalPrice } from '../redux/cartSlice';
 import { BsBag } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
-import PrimaryBtn from '../components/PrimaryBtn';
+import Link from 'next/link';
 import { ContinueShoppingBtn } from '../components/ContinueShoppingBtn';
+import Button from '../components/Button';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +39,8 @@ const Cart = () => {
           </div>
           <div className="flex flex-col items-center mb-24 border rounded-lg p-16">
             <h2 className="text-4xl text-right mb-4">${totalPrice}</h2>
-            <PrimaryBtn onClick={handlePlaceOrder}>Proceed to Checkout</PrimaryBtn>
+            <Button onClick={handlePlaceOrder}>Proceed to Checkout</Button>
+            {/* <PrimaryBtn onClick={handlePlaceOrder}>Proceed to Checkout</PrimaryBtn> */}
           </div>
         </div>
       )}
@@ -49,7 +51,9 @@ const Cart = () => {
           </span>
           <h1 className="text-4xl mb-4">SHOPPING CART IS EMPTY</h1>
           <p className="text-gray-500 mb-8">You have no items in your shopping cart</p>
-          <PrimaryBtn link="/store">Continue Shopping</PrimaryBtn>
+          <Button>
+            <Link href="/store">Continue Shopping</Link>
+          </Button>
         </div>
       )}
     </Layout>

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Popover } from '@headlessui/react';
-import PrimaryBtn from './PrimaryBtn';
 import { BsBag } from 'react-icons/bs';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { removeProduct, selectCart, selectTotalPrice } from '../redux/cartSlice';
 import Img from './Img';
 import Link from 'next/link';
 import { AiOutlineDelete } from 'react-icons/ai';
+import Button from './Button';
 
 const CartPopover = ({ cartProductsCount }: { cartProductsCount: number }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +48,7 @@ const CartPopover = ({ cartProductsCount }: { cartProductsCount: number }) => {
   };
 
   const cartBtn = (
-    <a className="flex justify-end items-center w-16" onClick={() => setIsOpen(true)}>
+    <a className="flex justify-end items-center w-8" onClick={() => setIsOpen(true)}>
       <span className="flex justify-end w-full mr-1">
         <BsBag size="1.5rem" />
       </span>
@@ -62,21 +62,21 @@ const CartPopover = ({ cartProductsCount }: { cartProductsCount: number }) => {
   const popover = (
     <Popover className="relative z-10 rounded-lg">
       <Popover.Button>{cartBtn}</Popover.Button>
-      <Popover.Panel className="absolute -left-80 bg-white shadow-lg rounded-lg w-96">
+      <Popover.Panel className="absolute -left-72 md:-left-96 bg-white shadow-lg rounded-lg w-80 md:w-96 ">
         <div className="border rounded-lg py-8 grid grid-rows-8">
           <h5 className="font-semibold px-8 mb-4">My Products</h5>
-          <div className="divide-y mb-4 overflow-scroll border-b">{renderCartProducts()}</div>
+          <div className="divide-y mb-4  border-b w-full">{renderCartProducts()}</div>
           <div className="flex justify-between items-center px-8 mb-4 text-xl">
             <span>Total:</span>
             <span>${totalPrice}</span>
           </div>
-          <div className="px-8">
-            <PrimaryBtn link="#" className="w-full h-12 text-sm mb-4">
-              Proceed to Checkout
-            </PrimaryBtn>
+          <div className="px-8 flex flex-col items-center">
+            <Button className="w-54 mt-8 mb-4">
+              <Link href="#">Proceed to Checkout</Link>
+            </Button>
             <div className="w-full flex justify-center">
               <Link href="/cart">
-                <a className="font-semibold">Go to Cart</a>
+                <a className="font-semibold underline">Go to Cart</a>
               </Link>
             </div>
           </div>
