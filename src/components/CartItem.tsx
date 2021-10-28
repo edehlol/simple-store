@@ -27,8 +27,8 @@ const CartItem = ({ product }: { product: CartProduct }) => {
     dispatch(subtractQuantity(product.id));
   };
   return (
-    <div className=" py-4 mb-4 grid grid-cols-3 md:grid-cols-12  border-b h-48">
-      <Img src={product.img} divClass="w-full h-full md:col-span-2" />
+    <div className=" py-4 mb-4 grid grid-cols-3 md:grid-cols-12  border-b ">
+      <Img src={product.img} divClass="w-full md:col-span-2 h-48" />
 
       <div className="ml-4 md:ml-8 grid grid-cols-1 grid-rows-4 md:grid-rows-1 md:grid-cols-5 md:col-span-9 h-full">
         <h3 className="self-center md:justify-self-start md:col-span-2 items-start">

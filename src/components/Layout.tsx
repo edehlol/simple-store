@@ -6,11 +6,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <NextNprogress
-        color="#29D"
+        color="rgb(37, 99, 235)"
         startPosition={0.3}
         stopDelayMs={200}
         height={3}
         showOnShallow={true}
+        options={{ showSpinner: false }}
       />
 
       <Navbar />

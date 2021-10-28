@@ -7,8 +7,6 @@ import { Provider } from 'react-redux';
 import { persistor, store } from '../redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import NextNprogress from 'nextjs-progressbar';
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
